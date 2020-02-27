@@ -13,7 +13,7 @@ server.use(express.json());
 server.use(cors());
 
 server.use('/api/auth', authRouter);
-server.use('/api/users', restricted, checkRole("user"), usersRouter);
+server.use('/api/users', restricted, usersRouter);
 
 server.get('/', (req, res) => {
     res.send("It's alive!");
@@ -21,16 +21,16 @@ server.get('/', (req, res) => {
 
 module.exports = server;
 
-function checkRole(role) {
-    return (req, res, next) => {
-        if (
-            req.decodedToken &&
-            req.decodedToken.role &&
-            req.decodedToken.role.toLowerCase() === role
-        ) {
-            next();
-        } else {
-            res.status(403).json({ you: "shall not pass!" });
-        }
-    };
-}
+// function checkRole(department) {
+//     return (req, res, next) => {
+//         if (
+//             req.decodedToken &&
+//             req.decodedToken.deparment &&
+//             req.decodedToken.department.toLowerCase() === department
+//         ) {
+//             next();
+//         } else {
+//             res.status(403).json({ you: "shall not pass!" });
+//         }
+//     };
+// };

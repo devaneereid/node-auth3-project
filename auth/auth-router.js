@@ -38,6 +38,7 @@ router.post('/login', (req, res) => {
             }
         }) 
         .catch(error => {
+            console.log(error)
             res.status(500).json(error);
         });
 });
@@ -46,7 +47,7 @@ function generateToken(user) {
     const payload = {
         subject: user.id,
         username: user.username,
-        role: user.role || 'user',
+        department: user.department || 'user',
     };
 
     const options = {
